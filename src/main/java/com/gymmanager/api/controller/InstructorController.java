@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,12 +29,12 @@ public class InstructorController {
     }
 
     @PostMapping
-    public ResponseEntity<Instructor> save(@RequestBody Instructor instructor) {
+    public ResponseEntity<Instructor> save(@RequestBody @Valid Instructor instructor) {
         return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.CREATED);
     }
 
     @PutMapping()
-    public ResponseEntity<Instructor> replace(@RequestBody Instructor instructor) {
+    public ResponseEntity<Instructor> replace(@RequestBody @Valid Instructor instructor) {
         return new ResponseEntity<>(instructorService.replace(instructor), HttpStatus.OK);
     }
 }

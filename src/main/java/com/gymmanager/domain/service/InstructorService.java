@@ -5,7 +5,9 @@ import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.domain.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class InstructorService {
                 .orElseThrow(() -> new NotFoundException("Instructor not found"));
     }
 
-    public Instructor save(Instructor instructor) {
+    public Instructor save(@RequestBody @Valid Instructor instructor) {
         instructor.setCreatedAt(LocalDate.now());
         return instructorRepository.save(instructor);
     }
