@@ -19,13 +19,21 @@ public class InstructorService {
         return instructorRepository.findAll();
     }
 
+    public Instructor findByIdOrThrowNotFoundException(Long id) {
+        return instructorRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Instructor not found"));
+    }
+
     public Instructor save(Instructor instructor) {
         instructor.setCreatedAt(LocalDate.now());
         return instructorRepository.save(instructor);
     }
 
-    public Instructor findById(Long id) {
-        return instructorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Instructor not found"));
+    public Instructor replace(Instructor updatedInstructor) {
+        Instructor savedInstructor = findByIdOrThrowNotFoundException(updatedInstructor.getId());
+        updatedInstructor.setCreatedAt(savedInstructor.getCreatedAt());
+        updatedInstructor.setId(savedInstructor.getId());
+
+        return instructorRepository.save(updatedInstructor);
     }
 }
