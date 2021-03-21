@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 NotFoundExceptionDetails.builder()
                         .status(HttpStatus.NOT_FOUND.value())
                         .title("Not found exception. Check Documentation")
-                        .timestamp(OffsetDateTime.now(ZoneOffset.UTC))
+                        .timestamp(LocalDateTime.now(ZoneOffset.UTC))
                         .details(notFoundException.getMessage())
                         .developerMessage("The resource doesn't exist")
                         .build(), HttpStatus.NOT_FOUND
@@ -46,7 +46,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(
                 ValidationExceptionDetails.builder()
-                        .timestamp(OffsetDateTime.now())
+                        .timestamp(LocalDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
                         .title("Bad Request Exception, Invalid Fields")
                         .details("Check the field(s) error")
@@ -63,7 +63,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionDetails exceptionDetails = ExceptionDetails.builder()
                 .status(status.value())
                 .title(ex.getCause().getMessage())
-                .timestamp(OffsetDateTime.now(ZoneOffset.UTC))
+                .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
                 .developerMessage(ex.getClass().getName())
                 .build();
