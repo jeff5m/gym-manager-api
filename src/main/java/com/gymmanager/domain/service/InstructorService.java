@@ -5,6 +5,7 @@ import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.domain.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
@@ -21,16 +22,19 @@ public class InstructorService {
         return instructorRepository.findAll();
     }
 
+    @Transactional
     public Instructor findByIdOrThrowNotFoundException(Long id) {
         return instructorRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Instructor not found"));
     }
 
+    @Transactional
     public Instructor save(@RequestBody @Valid Instructor instructor) {
         instructor.setCreatedAt(LocalDate.now());
         return instructorRepository.save(instructor);
     }
 
+    @Transactional
     public Instructor replace(Instructor updatedInstructor) {
         Instructor savedInstructor = findByIdOrThrowNotFoundException(updatedInstructor.getId());
         updatedInstructor.setCreatedAt(savedInstructor.getCreatedAt());

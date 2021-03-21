@@ -5,7 +5,6 @@ import com.gymmanager.domain.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,7 +32,7 @@ public class InstructorController {
         return new ResponseEntity<>(instructorService.save(instructor), HttpStatus.CREATED);
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<Instructor> replace(@RequestBody @Valid Instructor instructor) {
         return new ResponseEntity<>(instructorService.replace(instructor), HttpStatus.OK);
     }
