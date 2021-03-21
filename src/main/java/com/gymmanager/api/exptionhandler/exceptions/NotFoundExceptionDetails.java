@@ -5,6 +5,6 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class BadRequestExceptionDetails extends ExceptionDetails {
+public class NotFoundExceptionDetails extends ExceptionDetails{
 
 }

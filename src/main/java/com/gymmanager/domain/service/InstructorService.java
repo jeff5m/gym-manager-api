@@ -1,5 +1,6 @@
 package com.gymmanager.domain.service;
 
+import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.domain.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class InstructorService {
     }
 
     public Instructor findById(Long id) {
-        return instructorRepository.findById(id).get();
+        return instructorRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Instructor not found"));
     }
 }
