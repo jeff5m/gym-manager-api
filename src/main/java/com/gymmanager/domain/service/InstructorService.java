@@ -1,6 +1,7 @@
 package com.gymmanager.domain.service;
 
 import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
+import com.gymmanager.api.exptionhandler.exceptions.CpfAlreadyRegisteredException;
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.domain.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +32,10 @@ public class InstructorService {
 
     @Transactional
     public Instructor save(@RequestBody @Valid Instructor instructor) {
+        Optional<Instructor> existentInstructor = instructorRepository.findByCpf(instructor.getCpf());
+        if (existentInstructor.isPresent() && !existentInstructor.get().equals(instructor)) {
+            throw new CpfAlreadyRegisteredException("There is already a registered instructor with this cpf");
+        }
         instructor.setCreatedAt(LocalDate.now());
         return instructorRepository.save(instructor);
     }

@@ -5,6 +5,6 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class NotFoundExceptionDetails extends ExceptionDetails {
+public class CpfAlreadyRegisteredExceptionDetails extends ExceptionDetails {
 
 }

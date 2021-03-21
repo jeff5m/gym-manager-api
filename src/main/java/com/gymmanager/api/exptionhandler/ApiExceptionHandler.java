@@ -1,9 +1,6 @@
 package com.gymmanager.api.exptionhandler;
 
-import com.gymmanager.api.exptionhandler.exceptions.ExceptionDetails;
-import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
-import com.gymmanager.api.exptionhandler.exceptions.NotFoundExceptionDetails;
-import com.gymmanager.api.exptionhandler.exceptions.ValidationExceptionDetails;
+import com.gymmanager.api.exptionhandler.exceptions.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +13,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +25,23 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 NotFoundExceptionDetails.builder()
                         .status(HttpStatus.NOT_FOUND.value())
                         .title("Not found exception. Check Documentation")
-                        .timestamp(LocalDateTime.now(ZoneOffset.UTC))
                         .details(notFoundException.getMessage())
                         .developerMessage("The resource doesn't exist")
+                        .timestamp(LocalDateTime.now())
                         .build(), HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(CpfAlreadyRegisteredException.class)
+    public ResponseEntity<CpfAlreadyRegisteredExceptionDetails> handleCpfAlreadyRegisteredException(CpfAlreadyRegisteredException cpfAlreadyRegisteredException) {
+        return new ResponseEntity<>(
+                CpfAlreadyRegisteredExceptionDetails.builder()
+                        .status(HttpStatus.CONFLICT.value())
+                        .title("Cpf already registered exception. Check documentation")
+                        .details(cpfAlreadyRegisteredException.getMessage())
+                        .developerMessage("Are you sure this is your cpf?")
+                        .timestamp(LocalDateTime.now())
+                        .build(), HttpStatus.CONFLICT
         );
     }
 
@@ -46,13 +55,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(
                 ValidationExceptionDetails.builder()
-                        .timestamp(LocalDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
                         .title("Bad Request Exception, Invalid Fields")
                         .details("Check the field(s) error")
                         .developerMessage(exception.getClass().getName())
                         .fields(fields)
                         .fieldsMessage(fieldsMessage)
+                        .timestamp(LocalDateTime.now())
                         .build(), HttpStatus.BAD_REQUEST
         );
     }
@@ -63,9 +72,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionDetails exceptionDetails = ExceptionDetails.builder()
                 .status(status.value())
                 .title(ex.getCause().getMessage())
-                .timestamp(LocalDateTime.now())
                 .details(ex.getMessage())
                 .developerMessage(ex.getClass().getName())
+                .timestamp(LocalDateTime.now())
                 .build();
 
         return new ResponseEntity<>(exceptionDetails, headers, status);
