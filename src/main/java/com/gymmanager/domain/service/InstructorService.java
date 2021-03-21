@@ -24,6 +24,6 @@ public class InstructorService {
     }
 
     public Instructor findById(Long id) {
-        return null;
+        return instructorRepository.findById(id).get();
     }
 }

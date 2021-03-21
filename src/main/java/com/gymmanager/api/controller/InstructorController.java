@@ -23,7 +23,7 @@ public class InstructorController {
 
     @GetMapping("/{instructorId}")
     public ResponseEntity<Instructor> findById(@PathVariable Long instructorId) {
-        return new ResponseEntity<>(instructorService.findById(), HttpStatus.OK);
+        return new ResponseEntity<>(instructorService.findById(instructorId), HttpStatus.OK);
     }
 
     @PostMapping
