@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 @Data
@@ -42,7 +43,9 @@ public class Instructor {
     private InstructorServices services;
 
     @NotNull(message = "Instructor must have birth date")
+    @PastOrPresent
     private LocalDate birth;
 
+    @PastOrPresent
     private LocalDate createdAt;
 }
