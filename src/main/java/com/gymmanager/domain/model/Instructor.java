@@ -4,14 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 @Data
@@ -24,28 +18,25 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Instructor must have a name")
+    @Column(nullable = false)
     private String name;
 
-    @NotBlank(message = "Instructor must have a valid avatar URL")
-    @URL
+    @Column(nullable = false)
     private String avatarUrl;
 
-    @NotBlank(message = "Instructor must have an email")
-    @Email
+    @Column(nullable = false)
     private String email;
 
-    @NotBlank(message = "Instructor must have a valid CPF")
-    @CPF
+    @Column(nullable = false)
     private String cpf;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private InstructorServices services;
 
-    @NotNull(message = "Instructor must have birth date")
-    @PastOrPresent
+    @Column(nullable = false)
     private LocalDate birth;
 
-    @PastOrPresent
+    @Column(nullable = false)
     private LocalDate createdAt;
 }

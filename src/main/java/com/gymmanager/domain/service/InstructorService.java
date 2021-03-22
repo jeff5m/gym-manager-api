@@ -1,7 +1,11 @@
 package com.gymmanager.domain.service;
 
-import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
 import com.gymmanager.api.exptionhandler.exceptions.CpfAlreadyRegisteredException;
+import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
+import com.gymmanager.api.mapper.InstructorMapper;
+import com.gymmanager.api.mapper.requests.InstructorClientResponseBody;
+import com.gymmanager.api.mapper.requests.InstructorPostRequestBody;
+import com.gymmanager.api.mapper.requests.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.domain.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,37 +23,48 @@ import java.util.Optional;
 public class InstructorService {
 
     private final InstructorRepository instructorRepository;
+    private final InstructorMapper instructorMapper;
 
-    public List<Instructor> listAll() {
-        return instructorRepository.findAll();
+    public List<InstructorClientResponseBody> listAll() {
+        return instructorMapper.toListOfInstructorClientResponseBody(instructorRepository.findAll());
     }
 
-    public Instructor findByIdOrThrowNotFoundException(Long id) {
-        return instructorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Instructor not found"));
+    public InstructorClientResponseBody returnInstructorClientResponseIfFindById(Long id) {
+        Instructor foundedInstructor = findByIdOrThrowNotFoundException(id);
+        return instructorMapper.toInstructorClientResponseBody(foundedInstructor);
     }
 
     @Transactional
-    public Instructor save(@RequestBody @Valid Instructor instructor) {
-        Optional<Instructor> existentInstructor = instructorRepository.findByCpf(instructor.getCpf());
-        if (existentInstructor.isPresent() && !existentInstructor.get().equals(instructor)) {
-            throw new CpfAlreadyRegisteredException("There is already a registered instructor with this cpf");
+    public InstructorClientResponseBody save(@RequestBody @Valid InstructorPostRequestBody instructorPostRequestBody) {
+        
+        Optional<Instructor> existentInstructor = instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
+        if (existentInstructor.isPresent() && existentInstructor.get().getCpf().equals(instructorPostRequestBody.getCpf())) {
+            throw new CpfAlreadyRegisteredException("There is already a registered instructorPostRequestBody with this cpf");
         }
-        instructor.setCreatedAt(LocalDate.now());
-        return instructorRepository.save(instructor);
+        LocalDate creationDate = LocalDate.now();
+        Instructor instructor = instructorMapper.toInstructor(instructorPostRequestBody, creationDate);
+
+        return instructorMapper.toInstructorClientResponseBody(instructorRepository.save(instructor));
     }
 
     @Transactional
-    public Instructor replace(Instructor updatedInstructor) {
-        Instructor savedInstructor = findByIdOrThrowNotFoundException(updatedInstructor.getId());
-        updatedInstructor.setCreatedAt(savedInstructor.getCreatedAt());
-        updatedInstructor.setId(savedInstructor.getId());
+    public InstructorClientResponseBody replace(Long id, InstructorPutRequestBody instructorPutRequestBody) {
+        Instructor savedInstructor = findByIdOrThrowNotFoundException(id);
+        Instructor updatedInstructor = instructorMapper.toInstructor(instructorPutRequestBody, savedInstructor);
 
-        return instructorRepository.save(updatedInstructor);
+        updatedInstructor.setId(savedInstructor.getId());
+        updatedInstructor.setCreatedAt(savedInstructor.getCreatedAt());
+
+        return instructorMapper.toInstructorClientResponseBody(instructorRepository.save(updatedInstructor));
     }
 
     @Transactional
     public void delete(Long id) {
         instructorRepository.delete(findByIdOrThrowNotFoundException(id));
+    }
+
+    private Instructor findByIdOrThrowNotFoundException(Long id) {
+        return instructorRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Instructor not found"));
     }
 }
