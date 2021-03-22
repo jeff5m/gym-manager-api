@@ -22,9 +22,9 @@ public class InstructorController {
         return new ResponseEntity<>(instructorService.listAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{instructorId}")
-    public ResponseEntity<Instructor> findById(@PathVariable Long instructorId) {
-        return new ResponseEntity<>(instructorService.findByIdOrThrowNotFoundException(instructorId), HttpStatus.OK);
+    @GetMapping(path="/{id}")
+    public ResponseEntity<Instructor> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(instructorService.findByIdOrThrowNotFoundException(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -35,5 +35,11 @@ public class InstructorController {
     @PutMapping
     public ResponseEntity<Instructor> replace(@RequestBody @Valid Instructor instructor) {
         return new ResponseEntity<>(instructorService.replace(instructor), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path="/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        instructorService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

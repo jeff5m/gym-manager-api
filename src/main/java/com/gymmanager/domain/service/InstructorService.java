@@ -24,7 +24,6 @@ public class InstructorService {
         return instructorRepository.findAll();
     }
 
-    @Transactional
     public Instructor findByIdOrThrowNotFoundException(Long id) {
         return instructorRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Instructor not found"));
@@ -47,5 +46,10 @@ public class InstructorService {
         updatedInstructor.setId(savedInstructor.getId());
 
         return instructorRepository.save(updatedInstructor);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        instructorRepository.delete(findByIdOrThrowNotFoundException(id));
     }
 }
