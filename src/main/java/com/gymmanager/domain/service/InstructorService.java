@@ -52,9 +52,6 @@ public class InstructorService {
         Instructor savedInstructor = findByIdOrThrowNotFoundException(id);
         Instructor updatedInstructor = instructorMapper.toInstructor(instructorPutRequestBody, savedInstructor);
 
-        updatedInstructor.setId(savedInstructor.getId());
-        updatedInstructor.setCreatedAt(savedInstructor.getCreatedAt());
-
         return instructorMapper.toInstructorClientResponseBody(instructorRepository.save(updatedInstructor));
     }
 
