@@ -39,7 +39,7 @@ public class InstructorService {
         
         Optional<Instructor> existentInstructor = instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
         if (existentInstructor.isPresent() && existentInstructor.get().getCpf().equals(instructorPostRequestBody.getCpf())) {
-            throw new CpfAlreadyRegisteredException("There is already a registered instructorPostRequestBody with this cpf");
+            throw new CpfAlreadyRegisteredException("There is already a registered Instructor with this cpf");
         }
         LocalDate creationDate = LocalDate.now();
         Instructor instructor = instructorMapper.toInstructor(instructorPostRequestBody, creationDate);
