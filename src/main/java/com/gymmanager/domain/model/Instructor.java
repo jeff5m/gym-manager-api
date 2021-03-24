@@ -18,19 +18,19 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false)
     private String avatarUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 60)
     private String email;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private InstructorServices services;
 

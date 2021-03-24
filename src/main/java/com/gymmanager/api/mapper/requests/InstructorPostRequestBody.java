@@ -10,10 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
@@ -34,6 +31,7 @@ public class InstructorPostRequestBody {
     private String email;
 
     @NotBlank(message = "Instructor must have a valid CPF")
+    @Size(message = "The 'cpf' field must contains 11 digits", min = 11, max = 11)
     @CPF
     private String cpf;
 
@@ -41,6 +39,6 @@ public class InstructorPostRequestBody {
     private InstructorServices services;
 
     @NotNull(message = "Instructor must have birth date")
-    @PastOrPresent
+    @Past(message = "Must be a past date")
     private LocalDate birth;
 }
