@@ -1,4 +1,4 @@
-package com.gymmanager.api.mapper.requests;
+package com.gymmanager.domain.mapper.requests;
 
 import com.gymmanager.domain.model.InstructorServices;
 import lombok.AllArgsConstructor;

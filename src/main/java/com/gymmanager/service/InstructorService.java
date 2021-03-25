@@ -1,13 +1,13 @@
-package com.gymmanager.domain.service;
+package com.gymmanager.service;
 
-import com.gymmanager.api.exptionhandler.exceptions.CpfAlreadyRegisteredException;
-import com.gymmanager.api.exptionhandler.exceptions.NotFoundException;
-import com.gymmanager.api.mapper.InstructorMapper;
-import com.gymmanager.api.mapper.requests.InstructorClientResponseBody;
-import com.gymmanager.api.mapper.requests.InstructorPostRequestBody;
-import com.gymmanager.api.mapper.requests.InstructorPutRequestBody;
+import com.gymmanager.domain.mapper.InstructorMapper;
+import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
+import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
-import com.gymmanager.domain.repository.InstructorRepository;
+import com.gymmanager.exptionhandler.exceptions.CpfAlreadyRegisteredException;
+import com.gymmanager.exptionhandler.exceptions.NotFoundException;
+import com.gymmanager.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

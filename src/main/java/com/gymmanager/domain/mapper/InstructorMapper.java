@@ -1,8 +1,8 @@
-package com.gymmanager.api.mapper;
+package com.gymmanager.domain.mapper;
 
-import com.gymmanager.api.mapper.requests.InstructorClientResponseBody;
-import com.gymmanager.api.mapper.requests.InstructorPostRequestBody;
-import com.gymmanager.api.mapper.requests.InstructorPutRequestBody;
+import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
+import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

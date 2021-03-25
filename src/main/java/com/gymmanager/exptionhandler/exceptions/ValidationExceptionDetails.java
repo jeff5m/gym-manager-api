@@ -1,4 +1,4 @@
-package com.gymmanager.api.exptionhandler.exceptions;
+package com.gymmanager.exptionhandler.exceptions;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

@@ -1,4 +1,4 @@
-package com.gymmanager.domain.repository;
+package com.gymmanager.repository;
 
 import com.gymmanager.domain.model.Instructor;
 import org.springframework.data.jpa.repository.JpaRepository;

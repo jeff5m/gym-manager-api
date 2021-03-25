@@ -1,4 +1,4 @@
-package com.gymmanager.api.exptionhandler.exceptions;
+package com.gymmanager.exptionhandler.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

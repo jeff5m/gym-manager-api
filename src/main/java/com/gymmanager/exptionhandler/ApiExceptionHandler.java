@@ -1,6 +1,6 @@
-package com.gymmanager.api.exptionhandler;
+package com.gymmanager.exptionhandler;
 
-import com.gymmanager.api.exptionhandler.exceptions.*;
+import com.gymmanager.exptionhandler.exceptions.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
