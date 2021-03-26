@@ -37,7 +37,7 @@ public class InstructorPostRequestBody {
     @Enumerated(EnumType.STRING)
     private InstructorServices services;
 
-    @NotNull(message = "Instructor must have birth date")
+    @NotNull(message = "Instructor must have a birth date")
     @Past(message = "Must be a past date")
     private LocalDate birth;
 }

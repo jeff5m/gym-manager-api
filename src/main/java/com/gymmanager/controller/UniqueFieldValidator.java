@@ -21,7 +21,7 @@ public abstract class UniqueFieldValidator implements Validator {
 
         String invalidFieldName = getInvalidFieldName();
         if (possibleInstructor.isPresent()) {
-            errors.rejectValue(invalidFieldName,"","There is already an instructor with this " + invalidFieldName);
+            errors.rejectValue(invalidFieldName,"","There is already an instructor registered with this " + invalidFieldName);
         }
     }
 
