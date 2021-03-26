@@ -1,6 +1,9 @@
 package com.gymmanager.exptionhandler;
 
-import com.gymmanager.exptionhandler.exceptions.*;
+import com.gymmanager.exptionhandler.exceptions.ExceptionDetails;
+import com.gymmanager.exptionhandler.exceptions.NotFoundException;
+import com.gymmanager.exptionhandler.exceptions.NotFoundExceptionDetails;
+import com.gymmanager.exptionhandler.exceptions.ValidationExceptionDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +32,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                         .developerMessage("The resource doesn't exist")
                         .timestamp(LocalDateTime.now())
                         .build(), HttpStatus.NOT_FOUND
-        );
-    }
-
-    @ExceptionHandler(CpfAlreadyRegisteredException.class)
-    public ResponseEntity<CpfAlreadyRegisteredExceptionDetails> handleCpfAlreadyRegisteredException(CpfAlreadyRegisteredException cpfAlreadyRegisteredException) {
-        return new ResponseEntity<>(
-                CpfAlreadyRegisteredExceptionDetails.builder()
-                        .status(HttpStatus.CONFLICT.value())
-                        .title("Cpf already registered exception. Check documentation")
-                        .details(cpfAlreadyRegisteredException.getMessage())
-                        .developerMessage("Are you sure this is your cpf?")
-                        .timestamp(LocalDateTime.now())
-                        .build(), HttpStatus.CONFLICT
         );
     }
 
