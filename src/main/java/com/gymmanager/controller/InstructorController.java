@@ -7,6 +7,7 @@ import com.gymmanager.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,14 @@ import java.util.List;
 public class InstructorController {
 
     private final InstructorService instructorService;
+    private final NoRepeatedCpfValidator noRepeatedCpfValidator;
+    private final NoRepeatedEmailValidator noRepeatedEmailValidator;
+
+    @InitBinder("instructorPostRequestBody")
+    public void init(WebDataBinder dataBinder) {
+        dataBinder.addValidators(noRepeatedCpfValidator);
+        dataBinder.addValidators(noRepeatedEmailValidator);
+    }
 
     @GetMapping
     public ResponseEntity<List<InstructorClientResponseBody>> listAll() {

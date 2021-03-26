@@ -5,7 +5,6 @@ import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
 import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
-import com.gymmanager.exptionhandler.exceptions.CpfAlreadyRegisteredException;
 import com.gymmanager.exptionhandler.exceptions.NotFoundException;
 import com.gymmanager.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +34,6 @@ public class InstructorService {
 
     @Transactional
     public InstructorClientResponseBody save(@RequestBody @Valid InstructorPostRequestBody instructorPostRequestBody) {
-        
-        Optional<Instructor> existentInstructor = instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
-        if (existentInstructor.isPresent() && existentInstructor.get().getCpf().equals(instructorPostRequestBody.getCpf())) {
-            throw new CpfAlreadyRegisteredException("There is already a registered Instructor with this cpf");
-        }
         LocalDate creationDate = LocalDate.now();
         Instructor instructor = instructorMapper.toInstructor(instructorPostRequestBody, creationDate);
 
