@@ -20,6 +20,7 @@ import java.time.LocalDate;
 public class InstructorPostRequestBody {
 
     @NotBlank(message = "Instructor must have a name")
+    @Size(message = "Name length must be between 0 and 100 characters", max = 100)
     private String name;
 
     @NotBlank(message = "Instructor must have a valid avatar URL")
@@ -27,6 +28,7 @@ public class InstructorPostRequestBody {
     private String avatarUrl;
 
     @NotBlank(message = "Instructor must have an email")
+    @Size(message = "Email length must be between 0 and 100 characters", max = 60)
     @Email
     private String email;
 
