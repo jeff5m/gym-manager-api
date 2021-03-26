@@ -3,31 +3,26 @@ package com.gymmanager.controller;
 import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.repository.InstructorRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
-public class NoRepeatedCpfValidator implements Validator {
+public class NoRepeatedCpfValidator extends UniqueFieldValidator {
 
     private final InstructorRepository instructorRepository;
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return InstructorPostRequestBody.class.isAssignableFrom(aClass);
+    public NoRepeatedCpfValidator(InstructorRepository instructorRepository) {
+        this.instructorRepository = instructorRepository;
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
-        InstructorPostRequestBody instructorPostRequestBody = (InstructorPostRequestBody) o;
-        Optional<Instructor> possibleInstructor = instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
+    public Optional<Instructor> findInstructorBySomeField(InstructorPostRequestBody instructorPostRequestBody) {
+        return instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
+    }
 
-        if (possibleInstructor.isPresent()) {
-            errors.rejectValue("cpf", null, "Já existe um instrutor com o cpf informado");
-        }
+    @Override
+    protected String getInvalidFieldName() {
+        return "cpf";
     }
 }
