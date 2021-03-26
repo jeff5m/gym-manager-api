@@ -24,7 +24,7 @@ public class Instructor {
     @Column(nullable = false)
     private String avatarUrl;
 
-    @Column(nullable = false, length = 60)
+    @Column(unique = true, nullable = false, length = 60)
     private String email;
 
     @Column(unique = true, nullable = false, length = 11)
