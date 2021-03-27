@@ -1,5 +1,7 @@
 package com.gymmanager.controller;
 
+import com.gymmanager.controller.validations.NoRepeatedCpfValidator;
+import com.gymmanager.controller.validations.NoRepeatedEmailValidator;
 import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
 import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;

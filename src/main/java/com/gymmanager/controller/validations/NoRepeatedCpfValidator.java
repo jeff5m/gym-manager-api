@@ -1,4 +1,4 @@
-package com.gymmanager.controller;
+package com.gymmanager.controller.validations;
 
 import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
 import com.gymmanager.domain.model.Instructor;
@@ -8,21 +8,21 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class NoRepeatedEmailValidator extends UniqueFieldValidator {
+public class NoRepeatedCpfValidator extends UniqueFieldValidator {
 
     private final InstructorRepository instructorRepository;
 
-    public NoRepeatedEmailValidator(InstructorRepository instructorRepository) {
+    public NoRepeatedCpfValidator(InstructorRepository instructorRepository) {
         this.instructorRepository = instructorRepository;
     }
 
     @Override
     public Optional<Instructor> findInstructorBySomeField(InstructorPostRequestBody instructorPostRequestBody) {
-        return instructorRepository.findByEmail(instructorPostRequestBody.getEmail());
+        return instructorRepository.findByCpf(instructorPostRequestBody.getCpf());
     }
 
     @Override
     protected String getInvalidFieldName() {
-        return "email";
+        return "cpf";
     }
 }

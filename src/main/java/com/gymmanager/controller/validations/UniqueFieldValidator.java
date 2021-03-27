@@ -1,4 +1,4 @@
-package com.gymmanager.controller;
+package com.gymmanager.controller.validations;
 
 import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
 import com.gymmanager.domain.model.Instructor;
