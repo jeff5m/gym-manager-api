@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Instructor {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,13 +26,17 @@ public class Instructor {
     private String email;
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
-    @Column(nullable = false, length = 50)
+    @Digits(integer = 3, fraction = 1)
+    @Column(nullable = false)
+    private BigDecimal weight;
+    @Digits(integer = 3, fraction = 1)
+    @Column(nullable = false)
+    private BigDecimal height;
+    @Column(nullable = false, length = 3)
+    private Integer age;
     @Enumerated(EnumType.STRING)
-    private InstructorServices services;
-    @OneToMany(mappedBy = "instructor")
-    private List<Student> students;
-    @Column(nullable = false)
-    private LocalDate birth;
-    @Column(nullable = false)
-    private LocalDate createdAt;
+    @Column(nullable = false, length = 1)
+    private StudentGender gender;
+    @ManyToOne(optional = false)
+    private Instructor instructor;
 }
