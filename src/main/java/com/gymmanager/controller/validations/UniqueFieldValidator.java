@@ -1,31 +1,25 @@
 package com.gymmanager.controller.validations;
 
-import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
-import com.gymmanager.domain.model.Instructor;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
+import com.gymmanager.service.InstructorService;
 
-import java.util.Optional;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-public abstract class UniqueFieldValidator implements Validator {
+public class UniqueFieldValidator implements ConstraintValidator<Unique, String> {
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return InstructorPostRequestBody.class.isAssignableFrom(aClass);
+    private final InstructorService instructorService;
+
+    public UniqueFieldValidator(InstructorService instructorService) {
+        this.instructorService = instructorService;
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
-        InstructorPostRequestBody instructorPostRequestBody = (InstructorPostRequestBody) o;
-        Optional<Instructor> possibleInstructor = findInstructorBySomeField(instructorPostRequestBody);
+    public boolean isValid(String value, ConstraintValidatorContext context) {
 
-        String invalidFieldName = getInvalidFieldName();
-        if (possibleInstructor.isPresent()) {
-            errors.rejectValue(invalidFieldName,"","There is already an instructor registered with this " + invalidFieldName);
+        if(value.contains("@")) {
+            return instructorService.findByEmail(value).isEmpty();
         }
+
+        return instructorService.findByCpf(value).isEmpty();
     }
-
-    public abstract Optional<Instructor> findInstructorBySomeField(InstructorPostRequestBody instructorPostRequestBody);
-
-    protected abstract String getInvalidFieldName();
 }

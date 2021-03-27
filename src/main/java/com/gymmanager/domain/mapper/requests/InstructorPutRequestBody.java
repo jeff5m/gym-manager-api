@@ -1,5 +1,6 @@
 package com.gymmanager.domain.mapper.requests;
 
+import com.gymmanager.controller.validations.Unique;
 import com.gymmanager.domain.model.InstructorServices;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

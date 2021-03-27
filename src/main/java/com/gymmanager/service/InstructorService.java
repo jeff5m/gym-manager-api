@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +52,14 @@ public class InstructorService {
     @Transactional
     public void delete(Long id) {
         instructorRepository.delete(findByIdOrThrowNotFoundException(id));
+    }
+
+    public Optional<Instructor> findByCpf(String cpf) {
+        return instructorRepository.findByCpf(cpf);
+    }
+
+    public Optional<Instructor> findByEmail(String email) {
+        return instructorRepository.findByEmail(email);
     }
 
     private Instructor findByIdOrThrowNotFoundException(Long id) {

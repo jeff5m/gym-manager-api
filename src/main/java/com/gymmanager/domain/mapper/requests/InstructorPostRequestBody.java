@@ -1,5 +1,6 @@
 package com.gymmanager.domain.mapper.requests;
 
+import com.gymmanager.controller.validations.Unique;
 import com.gymmanager.domain.model.InstructorServices;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,10 +31,12 @@ public class InstructorPostRequestBody {
     @NotBlank(message = "Instructor must have an email")
     @Size(message = "Email length must be between 0 and 100 characters", max = 60)
     @Email
+    @Unique(message = "There is already an instructor registered with this email")
     private String email;
 
     @NotEmpty
     @CPF(message = "The 'cpf' field must contains 11 numbers")
+    @Unique(message = "There is already an instructor registered with this cpf")
     private String cpf;
 
     @Enumerated(EnumType.STRING)
