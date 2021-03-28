@@ -25,6 +25,7 @@ public class InstructorPutRequestBody {
 
     @NotBlank(message = "Instructor must have an email")
     @Email
+    @Unique(message = "There is already an instructor registered with this email")
     private String email;
 
     @Enumerated(EnumType.STRING)
