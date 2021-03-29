@@ -30,11 +30,11 @@ public class InstructorPostRequestBody {
 
     @NotBlank(message = "Instructor must have an email")
     @Size(message = "Email length must be between 0 and 100 characters", max = 60)
-    @Email
+    @Email(message = "The informed email is in an invalid format")
     @Unique(message = "There is already an instructor registered with this email")
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Instructor must have a cpf")
     @CPF(message = "The 'cpf' field must contains 11 numbers")
     @Unique(message = "There is already an instructor registered with this cpf")
     private String cpf;

@@ -18,7 +18,7 @@ public class UniqueFieldValidator implements ConstraintValidator<Unique, String>
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value.contains("@")) {
+        if (value != null && value.contains("@")) {
             String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
             String id = uri.substring(uri.lastIndexOf('/') + 1);
             Optional<Instructor> foundedInstructor = instructorService.findByEmail(value);
