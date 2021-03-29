@@ -1,6 +1,6 @@
 package com.gymmanager.domain.mapper.requests.student;
 
-import com.gymmanager.controller.validations.Unique;
+import com.gymmanager.controller.validations.UniqueFieldStudent;
 import com.gymmanager.domain.model.StudentGender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,12 +31,12 @@ public class StudentPostRequestBody {
     @NotBlank(message = "Student must have an email")
     @Size(message = "Email length must be between 0 and 100 characters", max = 60)
     @Email
-    @Unique(message = "There is already an student registered with this email")
+    @UniqueFieldStudent(message = "There is already an student registered with this email")
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Student must have a cpf")
     @CPF(message = "The 'cpf' field must contains 11 numbers")
-    @Unique(message = "There is already an student registered with this cpf")
+    @UniqueFieldStudent(message = "There is already an student registered with this cpf")
     private String cpf;
 
     @NotNull

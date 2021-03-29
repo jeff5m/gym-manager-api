@@ -8,11 +8,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
-public class UniqueFieldValidator implements ConstraintValidator<Unique, String> {
+public class UniqueFieldInstructorValidator implements ConstraintValidator<UniqueFieldInstructor, String> {
 
     private final InstructorService instructorService;
 
-    public UniqueFieldValidator(InstructorService instructorService) {
+    public UniqueFieldInstructorValidator(InstructorService instructorService) {
         this.instructorService = instructorService;
     }
 

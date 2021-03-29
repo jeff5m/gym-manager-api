@@ -1,6 +1,6 @@
 package com.gymmanager.domain.mapper.requests.instructor;
 
-import com.gymmanager.controller.validations.Unique;
+import com.gymmanager.controller.validations.UniqueFieldInstructor;
 import com.gymmanager.domain.model.InstructorServices;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class InstructorPutRequestBody {
 
     @NotBlank(message = "Instructor must have an email")
     @Email
-    @Unique(message = "There is already an instructor registered with this email")
+    @UniqueFieldInstructor(message = "There is already an instructor registered with this email")
     private String email;
 
     @Enumerated(EnumType.STRING)

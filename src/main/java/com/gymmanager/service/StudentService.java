@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class StudentService {
@@ -21,5 +23,13 @@ public class StudentService {
         Student student = studentMapper.toStudent(studentPostRequestBody, studentPostRequestBody.getInstructor().getId());
 
         return studentMapper.toStudentClientResponseBody(studentRepository.save(student));
+    }
+
+    public Optional<Student> findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
+    public Optional<Student> findByCpf(String cpf) {
+        return studentRepository.findByCpf(cpf);
     }
 }
