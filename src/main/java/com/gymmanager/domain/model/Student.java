@@ -1,5 +1,6 @@
 package com.gymmanager.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,5 +39,6 @@ public class Student {
     @Column(nullable = false, length = 1)
     private StudentGender gender;
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Instructor instructor;
 }
