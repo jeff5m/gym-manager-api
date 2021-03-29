@@ -1,8 +1,8 @@
 package com.gymmanager.controller;
 
-import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
-import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
-import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

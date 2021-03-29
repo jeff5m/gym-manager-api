@@ -1,9 +1,9 @@
 package com.gymmanager.service;
 
 import com.gymmanager.domain.mapper.InstructorMapper;
-import com.gymmanager.domain.mapper.requests.InstructorClientResponseBody;
-import com.gymmanager.domain.mapper.requests.InstructorPostRequestBody;
-import com.gymmanager.domain.mapper.requests.InstructorPutRequestBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.exptionhandler.exceptions.NotFoundException;
 import com.gymmanager.repository.InstructorRepository;

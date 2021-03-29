@@ -1,4 +1,4 @@
-package com.gymmanager.domain.mapper.requests;
+package com.gymmanager.domain.mapper.requests.instructor;
 
 import com.gymmanager.controller.validations.Unique;
 import com.gymmanager.domain.model.InstructorServices;
