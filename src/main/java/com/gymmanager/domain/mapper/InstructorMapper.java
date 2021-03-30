@@ -4,6 +4,7 @@ import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponse
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
+import com.gymmanager.domain.model.Student;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,6 +16,7 @@ public interface InstructorMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", source = "creationDate")
+    @Mapping(target = "students", ignore = true)
     Instructor toInstructor(InstructorPostRequestBody instructorPostRequestBody, LocalDate creationDate);
 
     @Mapping(target = "avatarUrl", source = "instructorPutRequestBody.avatarUrl")
@@ -22,7 +24,15 @@ public interface InstructorMapper {
     @Mapping(target = "services", source = "instructorPutRequestBody.services")
     Instructor toInstructor(InstructorPutRequestBody instructorPutRequestBody, Instructor instructor);
 
+    @Mapping(target = "numberOfStudents", source = "students")
     InstructorClientResponseBody toInstructorClientResponseBody (Instructor instructor);
 
     List<InstructorClientResponseBody> toListOfInstructorClientResponseBody (List<Instructor> instructor);
+
+    default Long map(List<Student> studentList) {
+        if(studentList == null) {
+            return 0L;
+        }
+        return (long) studentList.size();
+    }
 }

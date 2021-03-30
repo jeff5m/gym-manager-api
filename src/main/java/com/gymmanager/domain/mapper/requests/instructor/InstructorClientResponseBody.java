@@ -17,5 +17,6 @@ public class InstructorClientResponseBody {
     private String avatarUrl;
     private InstructorServices services;
     private LocalDate createdAt;
+    private Long numberOfStudents;
 }
 
