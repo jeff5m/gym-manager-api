@@ -1,6 +1,5 @@
 package com.gymmanager.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +30,6 @@ public class Instructor {
     @Enumerated(EnumType.STRING)
     private InstructorServices services;
     @OneToMany(mappedBy = "instructor")
-    @JsonManagedReference
     private List<Student> students;
     @Column(nullable = false)
     private LocalDate birth;
