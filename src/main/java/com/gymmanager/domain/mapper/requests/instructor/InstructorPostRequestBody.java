@@ -39,6 +39,7 @@ public class InstructorPostRequestBody {
     @UniqueFieldInstructor(message = "There is already an instructor registered with this cpf")
     private String cpf;
 
+    @NotNull(message = "Instructor must teach something. Check documentation to see available services")
     @Enumerated(EnumType.STRING)
     private InstructorServices services;
 
