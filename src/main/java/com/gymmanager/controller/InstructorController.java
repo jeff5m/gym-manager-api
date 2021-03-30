@@ -1,6 +1,7 @@
 package com.gymmanager.controller;
 
 import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentsClientResponseBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.service.InstructorService;
@@ -27,6 +28,11 @@ public class InstructorController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<InstructorClientResponseBody> findById(@PathVariable Long id) {
         return new ResponseEntity<>(instructorService.returnInstructorClientResponseIfFindById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}/students")
+    public ResponseEntity<List<InstructorStudentsClientResponseBody>> listAllStudentsById(@PathVariable Long id) {
+        return new ResponseEntity<>(instructorService.listAllStudentsById(id), HttpStatus.OK);
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package com.gymmanager.domain.mapper;
 
 import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponseBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentsClientResponseBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
@@ -28,6 +29,8 @@ public interface InstructorMapper {
     InstructorClientResponseBody toInstructorClientResponseBody (Instructor instructor);
 
     List<InstructorClientResponseBody> toListOfInstructorClientResponseBody (List<Instructor> instructor);
+
+    List<InstructorStudentsClientResponseBody> toListOfInstructorsStudentsClientResponseBody (List<Student> students);
 
     default Long map(List<Student> studentList) {
         if(studentList == null) {
