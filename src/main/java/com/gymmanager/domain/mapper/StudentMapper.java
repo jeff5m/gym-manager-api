@@ -19,6 +19,8 @@ public interface StudentMapper {
     @Mapping(target = "instructor.numberOfStudents", source = "instructor.students")
     StudentClientResponseBody toStudentClientResponseBody(Student student);
 
+    List<StudentClientResponseBody> toListOfStudentClientResponseBody(List<Student> students);
+
     default Long map(List<Student> studentList) {
         return (long) studentList.size();
     }

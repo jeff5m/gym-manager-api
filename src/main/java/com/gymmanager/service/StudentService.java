@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,10 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
+
+    public List<StudentClientResponseBody> listAll() {
+        return studentMapper.toListOfStudentClientResponseBody(studentRepository.findAll());
+    }
 
     @Transactional
     public StudentClientResponseBody save(StudentPostRequestBody studentPostRequestBody) {
