@@ -39,6 +39,11 @@ public class StudentService {
         return studentMapper.toStudentClientResponseBody(studentRepository.save(updatedStudent));
     }
 
+    @Transactional
+    public void delete(Long id) {
+        studentRepository.delete(findByIdOrThrowNotFoundException(id));
+    }
+
     private Student findByIdOrThrowNotFoundException(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Student not Found"));
@@ -51,4 +56,5 @@ public class StudentService {
     public Optional<Student> findByCpf(String cpf) {
         return studentRepository.findByCpf(cpf);
     }
+
 }

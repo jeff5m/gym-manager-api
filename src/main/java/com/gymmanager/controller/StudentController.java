@@ -34,4 +34,10 @@ public class StudentController {
                                                              @RequestBody @Valid StudentPutRequestBody student) {
         return new ResponseEntity<>(studentService.replace(id, student), HttpStatus.OK);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        studentService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
