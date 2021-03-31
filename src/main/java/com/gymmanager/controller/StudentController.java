@@ -2,6 +2,7 @@ package com.gymmanager.controller;
 
 import com.gymmanager.domain.mapper.requests.student.StudentClientResponseBody;
 import com.gymmanager.domain.mapper.requests.student.StudentPostRequestBody;
+import com.gymmanager.domain.mapper.requests.student.StudentPutRequestBody;
 import com.gymmanager.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,5 +27,11 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentClientResponseBody> save(@RequestBody @Valid StudentPostRequestBody student) {
         return new ResponseEntity<>(studentService.save(student), HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<StudentClientResponseBody> replace(@PathVariable Long id,
+                                                             @RequestBody @Valid StudentPutRequestBody student) {
+        return new ResponseEntity<>(studentService.replace(id, student), HttpStatus.OK);
     }
 }

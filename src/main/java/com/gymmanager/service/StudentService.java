@@ -3,7 +3,9 @@ package com.gymmanager.service;
 import com.gymmanager.domain.mapper.StudentMapper;
 import com.gymmanager.domain.mapper.requests.student.StudentClientResponseBody;
 import com.gymmanager.domain.mapper.requests.student.StudentPostRequestBody;
+import com.gymmanager.domain.mapper.requests.student.StudentPutRequestBody;
 import com.gymmanager.domain.model.Student;
+import com.gymmanager.exptionhandler.exceptions.NotFoundException;
 import com.gymmanager.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,18 @@ public class StudentService {
         Student student = studentMapper.toStudent(studentPostRequestBody, studentPostRequestBody.getInstructor().getId());
 
         return studentMapper.toStudentClientResponseBody(studentRepository.save(student));
+    }
+
+    @Transactional
+    public StudentClientResponseBody replace(Long id, StudentPutRequestBody student) {
+        Student foundedStudent = findByIdOrThrowNotFoundException(id);
+        Student updatedStudent = studentMapper.toStudent(student, foundedStudent);
+        return studentMapper.toStudentClientResponseBody(studentRepository.save(updatedStudent));
+    }
+
+    private Student findByIdOrThrowNotFoundException(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Student not Found"));
     }
 
     public Optional<Student> findByEmail(String email) {

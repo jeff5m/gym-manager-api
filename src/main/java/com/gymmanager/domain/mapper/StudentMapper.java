@@ -2,6 +2,7 @@ package com.gymmanager.domain.mapper;
 
 import com.gymmanager.domain.mapper.requests.student.StudentClientResponseBody;
 import com.gymmanager.domain.mapper.requests.student.StudentPostRequestBody;
+import com.gymmanager.domain.mapper.requests.student.StudentPutRequestBody;
 import com.gymmanager.domain.model.Student;
 import com.gymmanager.service.InstructorService;
 import org.mapstruct.Mapper;
@@ -15,6 +16,10 @@ public interface StudentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "instructor", source = "instructorId")
     Student toStudent(StudentPostRequestBody studentPostRequestBody, Long instructorId);
+
+    @Mapping(target = "avatarUrl", source = "studentPutRequestBody.avatarUrl")
+    @Mapping(target = "email", source = "studentPutRequestBody.email")
+    Student toStudent(StudentPutRequestBody studentPutRequestBody, Student student);
 
     @Mapping(target = "instructor.numberOfStudents", source = "instructor.students")
     StudentClientResponseBody toStudentClientResponseBody(Student student);
