@@ -2,7 +2,7 @@ package com.gymmanager.service;
 
 import com.gymmanager.domain.mapper.InstructorMapper;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponseBody;
-import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentsClientResponseBody;
+import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentClientResponseBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.domain.model.Instructor;
@@ -34,7 +34,7 @@ public class InstructorService {
         return instructorMapper.toInstructorClientResponseBody(foundedInstructor);
     }
 
-    public List<InstructorStudentsClientResponseBody> listAllStudentsById(Long id) {
+    public List<InstructorStudentClientResponseBody> listAllStudentsById(Long id) {
         Instructor instructor = findByIdOrThrowNotFoundException(id);
         return instructorMapper.toListOfInstructorsStudentsClientResponseBody(instructor.getStudents());
     }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class InstructorStudentsClientResponseBody {
+public class InstructorStudentClientResponseBody {
     private Long id;
     private String name;
     private Integer age;
