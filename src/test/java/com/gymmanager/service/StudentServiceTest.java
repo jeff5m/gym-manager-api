@@ -61,6 +61,9 @@ class StudentServiceTest {
         BDDMockito.when(studentRepositoryMock.save(any(Student.class)))
                 .thenReturn(StudentCreator.validStudent());
 
+        BDDMockito.when(studentMapperMock.toStudent(ArgumentMatchers.any(StudentPostRequestBody.class)))
+                .thenReturn(StudentCreator.validStudentToBeSaved());
+
         BDDMockito.when(studentMapperMock.toStudent(ArgumentMatchers.any(StudentPutRequestBody.class), ArgumentMatchers.any(Student.class)))
                 .thenReturn(StudentCreator.validUpdatedStudent());
 
@@ -118,9 +121,6 @@ class StudentServiceTest {
     @Test
     @DisplayName("save returns student when successful")
     void save_ReturnsStudent_WhenSuccessful() {
-        BDDMockito.when(studentMapperMock.toStudent(ArgumentMatchers.any(StudentPostRequestBody.class), ArgumentMatchers.anyLong()))
-                .thenReturn(StudentCreator.validStudentToBeSaved());
-
         StudentClientResponseBody savedStudent = studentService.save(StudentPostRequestBodyCreator.validStudentPostRequestBody());
 
         Assertions.assertThat(savedStudent)

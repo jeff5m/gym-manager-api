@@ -27,7 +27,7 @@ public class StudentService {
 
     @Transactional
     public StudentClientResponseBody save(StudentPostRequestBody studentPostRequestBody) {
-        Student student = studentMapper.toStudent(studentPostRequestBody, studentPostRequestBody.getInstructor().getId());
+        Student student = studentMapper.toStudent(studentPostRequestBody);
 
         return studentMapper.toStudentClientResponseBody(studentRepository.save(student));
     }

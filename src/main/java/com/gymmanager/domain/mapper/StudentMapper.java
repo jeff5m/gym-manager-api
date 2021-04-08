@@ -14,8 +14,8 @@ import java.util.List;
 public interface StudentMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "instructor", source = "instructorId")
-    Student toStudent(StudentPostRequestBody studentPostRequestBody, Long instructorId);
+    @Mapping(target = "instructor", source = "studentPostRequestBody.instructor.id")
+    Student toStudent(StudentPostRequestBody studentPostRequestBody);
 
     @Mapping(target = "avatarUrl", source = "studentPutRequestBody.avatarUrl")
     @Mapping(target = "email", source = "studentPutRequestBody.email")
