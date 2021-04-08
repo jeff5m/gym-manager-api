@@ -86,6 +86,8 @@ class StudentControllerTest {
         StudentPutRequestBody studentPutRequestBody = StudentPutRequestBodyCreator.validStudentPutRequestBody();
         StudentClientResponseBody updatedStudent = studentController.replace(1L, studentPutRequestBody).getBody();
 
+        Assertions.assertThatCode(() -> studentController.replace(1L, studentPutRequestBody))
+                .doesNotThrowAnyException();
         Assertions.assertThat(updatedStudent)
                 .isNotNull()
                 .isEqualTo(StudentClientResponseBodyCreator.validUpdatedStudentClientResponseBody());

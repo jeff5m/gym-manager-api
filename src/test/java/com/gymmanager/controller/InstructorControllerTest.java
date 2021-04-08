@@ -7,6 +7,7 @@ import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentClientR
 import com.gymmanager.domain.model.Instructor;
 import com.gymmanager.service.InstructorService;
 import com.gymmanager.util.instructor.*;
+import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -128,6 +129,8 @@ class InstructorControllerTest {
         InstructorPutRequestBody instructorPutRequestBody = InstructorPutRequestBodyCreator.validInstructorPutRequestBody();
         InstructorClientResponseBody updatedInstructor = instructorController.replace(1L, instructorPutRequestBody).getBody();
 
+        Assertions.assertThatCode(() -> instructorController.replace(1L, instructorPutRequestBody))
+                .doesNotThrowAnyException();
         Assertions.assertThat(updatedInstructor)
                 .isNotNull()
                 .isEqualTo(InstructorClientResponseBodyCreator.validUpdatedInstructorClientResponseBody());

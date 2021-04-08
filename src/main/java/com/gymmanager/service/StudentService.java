@@ -44,7 +44,7 @@ public class StudentService {
         studentRepository.delete(findByIdOrThrowNotFoundException(id));
     }
 
-    private Student findByIdOrThrowNotFoundException(Long id) {
+    public Student findByIdOrThrowNotFoundException(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Student not Found"));
     }

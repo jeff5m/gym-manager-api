@@ -5,8 +5,8 @@ import com.gymmanager.domain.mapper.requests.student.StudentPutRequestBody;
 public class StudentPutRequestBodyCreator {
     public static StudentPutRequestBody validStudentPutRequestBody() {
         return StudentPutRequestBody.builder()
-                .avatarUrl(StudentCreator.validStudentToBeSaved().getAvatarUrl())
-                .email(StudentCreator.validStudentToBeSaved().getEmail())
+                .avatarUrl(StudentCreator.validUpdatedStudent().getAvatarUrl())
+                .email(StudentCreator.validUpdatedStudent().getEmail())
                 .build();
     }
 }
