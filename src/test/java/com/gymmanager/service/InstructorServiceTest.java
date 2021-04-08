@@ -150,9 +150,11 @@ class InstructorServiceTest {
     @Test
     @DisplayName("replace updates instructor when successful")
     void replace_UpdatesInstructor_WhenSuccessful() {
+        BDDMockito.when(instructorMapperMock.toInstructorClientResponseBody(ArgumentMatchers.any(Instructor.class)))
+                .thenReturn(InstructorClientResponseBodyCreator.validUpdatedInstructorClientResponseBody());
+
         InstructorPutRequestBody instructorPutRequestBody = InstructorPutRequestBodyCreator.validInstructorPutRequestBody();
         InstructorClientResponseBody updatedInstructor = instructorService.replace(1L, instructorPutRequestBody);
-        updatedInstructor.setAvatarUrl(instructorPutRequestBody.getAvatarUrl());
 
         Assertions.assertThat(updatedInstructor)
                 .isNotNull()

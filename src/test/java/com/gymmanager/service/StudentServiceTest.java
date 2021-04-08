@@ -65,7 +65,7 @@ class StudentServiceTest {
                 .thenReturn(StudentCreator.validStudentToBeSaved());
 
         BDDMockito.when(studentMapperMock.toStudent(ArgumentMatchers.any(StudentPutRequestBody.class), ArgumentMatchers.any(Student.class)))
-                .thenReturn(StudentCreator.validUpdatedStudent());
+                .thenReturn(StudentCreator.validStudent());
 
         BDDMockito.when(studentMapperMock.toStudentClientResponseBody(ArgumentMatchers.any(Student.class)))
                 .thenReturn(StudentClientResponseBodyCreator.validStudentClientResponseBody());
@@ -131,9 +131,11 @@ class StudentServiceTest {
     @Test
     @DisplayName("replace updates student when successful")
     void replace_UpdatesStudent_WhenSuccessful() {
+        BDDMockito.when(studentMapperMock.toStudentClientResponseBody(ArgumentMatchers.any(Student.class)))
+                .thenReturn(StudentClientResponseBodyCreator.validUpdatedStudentClientResponseBody());
+
         StudentPutRequestBody studentPutRequestBody = StudentPutRequestBodyCreator.validStudentPutRequestBody();
         StudentClientResponseBody updatedStudent = studentService.replace(1L, studentPutRequestBody);
-        updatedStudent.setAvatarUrl(studentPutRequestBody.getAvatarUrl());
 
         Assertions.assertThat(updatedStudent)
                 .isNotNull()

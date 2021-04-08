@@ -15,9 +15,9 @@ public class StudentClientResponseBodyCreator {
 
     public static StudentClientResponseBody validUpdatedStudentClientResponseBody() {
         return StudentClientResponseBody.builder()
-                .id(StudentCreator.validUpdatedStudent().getId())
-                .name(StudentCreator.validUpdatedStudent().getName())
-                .avatarUrl(StudentCreator.validUpdatedStudent().getAvatarUrl())
+                .id(1L)
+                .name("Jane Doe Student")
+                .avatarUrl("https://updated.com")
                 .instructor(InstructorClientResponseBodyCreator.validInstructorClientResponseBody())
                 .build();
     }
