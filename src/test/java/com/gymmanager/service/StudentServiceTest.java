@@ -134,6 +134,7 @@ class StudentServiceTest {
         StudentPutRequestBody studentPutRequestBody = StudentPutRequestBodyCreator.validStudentPutRequestBody();
         StudentClientResponseBody updatedStudent = studentService.replace(1L, studentPutRequestBody);
         updatedStudent.setAvatarUrl(studentPutRequestBody.getAvatarUrl());
+
         Assertions.assertThat(updatedStudent)
                 .isNotNull()
                 .isEqualTo(StudentClientResponseBodyCreator.validUpdatedStudentClientResponseBody());

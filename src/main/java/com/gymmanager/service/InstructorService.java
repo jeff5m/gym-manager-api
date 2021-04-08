@@ -68,12 +68,7 @@ public class InstructorService {
         return instructorRepository.findByEmail(email);
     }
 
-    public Instructor findAndReturnInstructorById(Long id) {
-        return instructorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Instructor not found"));
-    }
-
-    private Instructor findByIdOrThrowNotFoundException(Long id) {
+    public Instructor findByIdOrThrowNotFoundException(Long id) {
         return instructorRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Instructor not found"));
     }

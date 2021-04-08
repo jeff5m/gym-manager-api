@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InstructorClientResponseBody {
+    private Long id;
     private String name;
     private String avatarUrl;
     private InstructorServices services;
