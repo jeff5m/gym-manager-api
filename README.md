@@ -1,3 +1,4 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jeff5m/gym-manager-api/all-tests)
 ### 🏗️ <ins>*Projeto em Desenvolvimento*</ins>
 ## Gym Manager API
 
