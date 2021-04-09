@@ -25,7 +25,7 @@ public class InstructorStudentClientResponseBody {
             example = "M")
     private StudentGender gender;
     @Schema(description = "This is the Student's profile photo link",
-            example = "Anna Wright")
+            example = "https://some_url.com")
     private String avatarUrl;
 }
 
