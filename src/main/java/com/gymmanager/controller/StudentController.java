@@ -4,6 +4,7 @@ import com.gymmanager.domain.mapper.requests.student.StudentClientResponseBody;
 import com.gymmanager.domain.mapper.requests.student.StudentPostRequestBody;
 import com.gymmanager.domain.mapper.requests.student.StudentPutRequestBody;
 import com.gymmanager.service.StudentService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +21,26 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
+    @Operation(summary = "Lists data for all students", tags = "student")
     public ResponseEntity<List<StudentClientResponseBody>> listAll() {
         return new ResponseEntity<>(studentService.listAll(), HttpStatus.OK);
     }
 
     @PostMapping
+    @Operation(summary = "Persists a new student", tags = "student")
     public ResponseEntity<StudentClientResponseBody> save(@RequestBody @Valid StudentPostRequestBody student) {
         return new ResponseEntity<>(studentService.save(student), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
+    @Operation(summary = "Updates an existing student", tags = "student")
     public ResponseEntity<StudentClientResponseBody> replace(@PathVariable Long id,
                                                              @RequestBody @Valid StudentPutRequestBody student) {
         return new ResponseEntity<>(studentService.replace(id, student), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Deletes an existing student", tags = "student")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         studentService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
