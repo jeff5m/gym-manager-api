@@ -5,6 +5,7 @@ import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentClientR
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.service.InstructorService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,32 +22,38 @@ public class InstructorController {
     private final InstructorService instructorService;
 
     @GetMapping
+    @Operation(summary = "Lists data for all instructors", tags = "instructor")
     public ResponseEntity<List<InstructorClientResponseBody>> listAll() {
         return new ResponseEntity<>(instructorService.listAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Lists data for a specific instructor finding by or id", tags = "instructor")
     public ResponseEntity<InstructorClientResponseBody> findById(@PathVariable Long id) {
         return new ResponseEntity<>(instructorService.returnInstructorClientResponseIfFindById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}/students")
+    @Operation(summary = "Lists students for a specific instructor finding by or id", tags = "instructor")
     public ResponseEntity<List<InstructorStudentClientResponseBody>> listAllStudentsById(@PathVariable Long id) {
         return new ResponseEntity<>(instructorService.listAllStudentsById(id), HttpStatus.OK);
     }
 
     @PostMapping
+    @Operation(summary = "Persists a new instructor", tags = "instructor")
     public ResponseEntity<InstructorClientResponseBody> save(@RequestBody @Valid InstructorPostRequestBody instructorPostRequestBody) {
         return new ResponseEntity<>(instructorService.save(instructorPostRequestBody), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
+    @Operation(summary = "Updates an existing instructor", tags = "instructor")
     public ResponseEntity<InstructorClientResponseBody> replace(@PathVariable Long id,
                                               @RequestBody @Valid InstructorPutRequestBody instructorPutRequestBody) {
         return new ResponseEntity<>(instructorService.replace(id, instructorPutRequestBody), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Deletes an existing instructor", tags = "instructor")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         instructorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
