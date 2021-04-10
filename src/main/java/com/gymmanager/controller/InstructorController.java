@@ -4,7 +4,6 @@ import com.gymmanager.domain.mapper.requests.instructor.InstructorClientResponse
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPostRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorPutRequestBody;
 import com.gymmanager.domain.mapper.requests.instructor.InstructorStudentClientResponseBody;
-import com.gymmanager.exptionhandler.exceptions.ExceptionDetails;
 import com.gymmanager.service.InstructorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -40,7 +39,7 @@ public class InstructorController {
             @ApiResponse(
                     responseCode = "404",
                     description = "When no Instructor is found",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class)))})
+                    content = @Content(schema = @Schema(hidden = true)))})
     public ResponseEntity<InstructorClientResponseBody> findById(@PathVariable Long id) {
         return new ResponseEntity<>(instructorService.returnInstructorClientResponseIfFindById(id), HttpStatus.OK);
     }
@@ -52,7 +51,7 @@ public class InstructorController {
             @ApiResponse(
                     responseCode = "404",
                     description = "When no Instructor is found",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class)))})
+                    content = @Content(schema = @Schema(hidden = true)))})
     public ResponseEntity<List<InstructorStudentClientResponseBody>> listAllStudentsById(@PathVariable Long id) {
         return new ResponseEntity<>(instructorService.listAllStudentsById(id), HttpStatus.OK);
     }
@@ -64,7 +63,7 @@ public class InstructorController {
             @ApiResponse(
                     responseCode = "400",
                     description = "When one or more fields are invalid",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class)))})
+                    content = @Content(schema = @Schema(hidden = true)))})
     public ResponseEntity<InstructorClientResponseBody> save(@RequestBody @Valid InstructorPostRequestBody instructorPostRequestBody) {
         return new ResponseEntity<>(instructorService.save(instructorPostRequestBody), HttpStatus.CREATED);
     }
@@ -76,10 +75,10 @@ public class InstructorController {
             @ApiResponse(
                     responseCode = "400",
                     description = "When one or more fields are invalid",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class))),
+                    content = @Content(schema = @Schema(hidden = true))),
             @ApiResponse(responseCode = "404",
                     description = "When no Instructor is found",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class)))})
+                    content = @Content(schema = @Schema(hidden = true)))})
     public ResponseEntity<InstructorClientResponseBody> replace(@PathVariable Long id,
                                                                 @RequestBody @Valid InstructorPutRequestBody instructorPutRequestBody) {
         return new ResponseEntity<>(instructorService.replace(id, instructorPutRequestBody), HttpStatus.OK);
@@ -92,7 +91,7 @@ public class InstructorController {
             @ApiResponse(
                     responseCode = "404",
                     description = "When no Instructor is found",
-                    content = @Content(schema = @Schema(implementation = ExceptionDetails.class)))})
+                    content = @Content(schema = @Schema(hidden = true)))})
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         instructorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
