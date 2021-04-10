@@ -21,7 +21,5 @@ public class StudentClientResponseBody {
     @Schema(description = "This is the Student's profile photo link",
             example = "https://some_url.com")
     private String avatarUrl;
-    @Schema(description = "This is the Student's Instructor",
-            example = "John Dear")
     private InstructorClientResponseBody instructor;
 }

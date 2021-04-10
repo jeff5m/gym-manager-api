@@ -87,7 +87,7 @@ public class StudentPostRequestBody {
 
     @NotNull(message = "Student must have an Instructor")
     @Schema(description = "This is an object instructor that contains Student's Instructor id",
-            example = "instructor: {'id': 2}",
+            example = "{\"id\": 2}",
             required = true)
     private StudentPostInstructorId instructor;
 }
