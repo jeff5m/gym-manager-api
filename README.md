@@ -1,4 +1,5 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jeff5m/gym-manager-api/all-tests)
+[![all-tests](https://github.com/jeff5m/gym-manager-api/actions/workflows/maven.yml/badge.svg)](https://github.com/jeff5m/gym-manager-api/actions/workflows/maven.yml)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/jeff5m/gym-manager-api/latest)
 ## Gym Manager API
 
