@@ -6,9 +6,9 @@ spring:
   application:
     name: GymManager
   datasource:
-    url: jdbc:mysql://localhost:3306/gymmanager?createDatabaseIfNotExist=true
-    username: root
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:h2:mem:gymmanager
+    username: admin
+    password: gymmanager
   jpa:
     hibernate:
       ddl-auto: update
