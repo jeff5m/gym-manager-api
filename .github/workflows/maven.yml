@@ -23,3 +23,10 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: ./mvnw clean install -P all-tests
+    - name: Authenticate in Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build and Push Docker Image
+      run: ./mvnw jib:build
